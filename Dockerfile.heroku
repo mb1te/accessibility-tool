@@ -2,19 +2,18 @@ FROM python:3
 
 ENV PYTHONBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
+ENV DEBUG 0
 
-COPY . /backend
+COPY . .
+
 WORKDIR /backend
 
-RUN pip install -U pip --quiet && \
-    pip install poetry --quiet && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-dev --quiet
+RUN ls
 
-ARG SECRET_KEY=$SECRET_KEY
-ARG POSTGRES_USER=$POSTGRES_USER
-ARG POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-ARG POSTGRES_DB=$POSTGRES_DB
+RUN pip install -U pip && \
+    pip install poetry && \
+    poetry config virtualenvs.create false && \
+    poetry install --no-dev
 
 CMD poetry run python manage.py makemigrations && \
     poetry run python manage.py migrate && \
