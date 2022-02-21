@@ -17,4 +17,4 @@ RUN pip install -U pip && \
 
 CMD poetry run python manage.py makemigrations && \
     poetry run python manage.py migrate && \
-    poetry run gunicorn -b 0.0.0.0:8000 --worker-class=gevent --worker-connections=1000 --workers=5 backend.wsgi
+    poetry run python manage.py runserver 0.0.0.0:8000
