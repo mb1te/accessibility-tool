@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - setup_ci
 jobs:
   build:
     runs-on: ubuntu-latest
